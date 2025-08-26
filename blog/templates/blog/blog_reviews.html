@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+{% block title %}Reviews for {{ blog.title }}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-8">
+
+  <!-- Blog Title -->
+  <div class="mb-6 text-center">
+    <h1 class="text-2xl font-bold text-gray-800">⭐ Reviews for: {{ blog.title }}</h1>
+    <p class="text-gray-500 text-sm">({{ reviews.count }} total reviews)</p>
+  </div>
+
+  <!-- Average Rating Summary + Sort Options -->
+  <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-5 mb-8 shadow flex flex-col md:flex-row md:items-center md:justify-between">
+    <div class="text-center md:text-left mb-4 md:mb-0">
+      {% if avg_rating %}
+        <h2 class="text-lg font-semibold text-gray-800">Average Rating</h2>
+        <div class="flex justify-center md:justify-start items-center mt-2 space-x-1">
+          {% for i in "123456" %}
+            {% if avg_rating|floatformat:0 >= i %}
+              <span class="text-yellow-500 text-xl">★</span>
+            {% else %}
+              <span class="text-gray-300 text-xl">★</span>
+            {% endif %}
+          {% endfor %}
+          <span class="ml-2 text-gray-700 font-medium">{{ avg_rating|floatformat:1 }}/6</span>
+        </div>
+      {% else %}
+        <p class="text-gray-500">No ratings yet</p>
+      {% endif %}
+    </div>
+
+    <!-- Sort Dropdown -->
+    <form method="get" class="flex justify-center">
+      <select name="sort" onchange="this.form.submit()"
+              class="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500">
+        <option value="">Sort Reviews</option>
+        <option value="newest" {% if request.GET.sort == "newest" %}selected{% endif %}>Newest</option>
+        <option value="oldest" {% if request.GET.sort == "oldest" %}selected{% endif %}>Oldest</option>
+        <option value="highest" {% if request.GET.sort == "highest" %}selected{% endif %}>Highest Rated</option>
+        <option value="lowest" {% if request.GET.sort == "lowest" %}selected{% endif %}>Lowest Rated</option>
+      </select>
+    </form>
+  </div>
+
+  <!-- Reviews List -->
+  <div class="space-y-6">
+    {% for review in reviews %}
+      <div class="bg-white shadow rounded-lg p-5 border border-gray-100">
+        
+        <!-- Reviewer + Rating -->
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center space-x-3">
+            {% if review.user.profile_image %}
+              <img src="{{ review.user.profile_image.url }}" 
+                   class="w-10 h-10 rounded-full object-cover" alt="{{ review.user.username }}">
+            {% else %}
+              <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
+                👤
+              </div>
+            {% endif %}
+            <div>
+            <p class="font-semibold text-gray-800">
+              <a href="{% url 'profile' review.user.id %}" class="hover:text-indigo-600">
+                {{ review.user.get_full_name|default:review.user.username }}
+              </a>
+            </p>
+            <p class="text-xs text-gray-500">{{ review.created|date:"M d, Y H:i" }}</p>
+          </div>
+          </div>
+
+          <!-- Rating Stars -->
+          <div class="flex items-center space-x-0.5">
+            {% for i in "123456" %}
+              {% if review.rating|floatformat:0 >= i %}
+                <span class="text-yellow-500">★</span>
+              {% else %}
+                <span class="text-gray-300">★</span>
+              {% endif %}
+            {% endfor %}
+            <span class="ml-1 text-sm text-gray-600">({{ review.rating }}/6)</span>
+          </div>
+        </div>
+
+        <!-- Review Text -->
+        {% if review.review %}
+          <p class="text-gray-700 mt-2">{{ review.review }}</p>
+        {% else %}
+          <p class="text-gray-400 italic mt-2">No written review.</p>
+        {% endif %}
+
+        <!-- Edit & Delete Buttons -->
+        {% if user.is_authenticated and review.user == user %}
+        <div class="mt-4 flex space-x-3">
+          <a href="javascript:void(0);" 
+             onclick="openReviewEditModal('{{ blog.slug }}', '{{ review.id }}', '{{ review.rating }}', `{{ review.review|escapejs }}`)" 
+             class="px-3 py-1.5 rounded-lg border text-blue-600 hover:bg-blue-50 text-sm">
+            ✏️ Edit
+          </a>
+          <a href="javascript:void(0);" 
+             onclick="openReviewDeleteModal('{{ blog.slug }}', '{{ review.id }}')" 
+             class="px-3 py-1.5 rounded-lg border text-red-600 hover:bg-red-50 text-sm">
+            🗑️ Delete
+          </a>
+        </div>
+        {% endif %}
+      </div>
+    {% empty %}
+      <div class="text-center py-10">
+        <p class="text-gray-500">No reviews yet. Be the first to leave one ⭐</p>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Back Button -->
+  <div class="mt-8 text-center">
+    <a href="{% url 'home' %}" 
+       class="px-5 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 shadow">
+      ⬅ Back to Blogs
+    </a>
+  </div>
+
+</div>
+
+<!-- 🔹 Review Edit Modal -->
+<div id="reviewEditModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-xl shadow-lg max-w-md w-full p-6">
+    <h2 class="text-lg font-semibold text-gray-800 mb-4">✏️ Edit Review</h2>
+    <form id="editReviewForm" method="post">
+      {% csrf_token %}
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Rating (0–6)</label>
+        <input id="editRatingInput" type="number" name="rating" min="0" max="6" step="0.5"
+               class="w-full rounded-lg border px-3 py-2 focus:ring-2 focus:ring-yellow-500" required>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Review</label>
+        <textarea id="editReviewInput" name="review" rows="4"
+                  class="w-full rounded-lg border px-3 py-2 focus:ring-2 focus:ring-yellow-500"></textarea>
+      </div>
+      <div class="flex justify-end space-x-3">
+        <button type="button" onclick="closeReviewEditModal()"
+                class="px-4 py-2 rounded-lg border text-gray-600 hover:bg-gray-100">Cancel</button>
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 🔹 Review Delete Modal -->
+<div id="reviewDeleteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-xl shadow-lg max-w-md w-full p-6 text-center">
+    <h2 class="text-lg font-semibold text-gray-800 mb-4">⚠️ Confirm Delete</h2>
+    <p class="text-gray-600 mb-6">Are you sure you want to delete this review? This action cannot be undone.</p>
+    <form id="deleteReviewForm" method="post">
+      {% csrf_token %}
+      <div class="flex justify-center space-x-3">
+        <button type="button" onclick="closeReviewDeleteModal()"
+                class="px-4 py-2 rounded-lg border text-gray-600 hover:bg-gray-100">Cancel</button>
+        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg shadow">Yes, Delete</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  // ----- Edit Modal -----
+  function openReviewEditModal(slug, id, rating, reviewText) {
+    const form = document.getElementById('editReviewForm');
+    form.action = `/blogs/${slug}/review/`;
+    document.getElementById('editRatingInput').value = rating;
+    document.getElementById('editReviewInput').value = reviewText;
+    document.getElementById('reviewEditModal').classList.remove('hidden');
+  }
+  function closeReviewEditModal() {
+    document.getElementById('reviewEditModal').classList.add('hidden');
+  }
+
+  // ----- Delete Modal -----
+  function openReviewDeleteModal(slug, id) {
+    const form = document.getElementById('deleteReviewForm');
+    form.action = `/blogs/${slug}/delete/review/`;
+    document.getElementById('reviewDeleteModal').classList.remove('hidden');
+  }
+  function closeReviewDeleteModal() {
+    document.getElementById('reviewDeleteModal').classList.add('hidden');
+  }
+</script>
+
+{% endblock %}

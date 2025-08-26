@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}My Favorites{% endblock %}
+{% block content %}
+
+<div class="max-w-5xl mx-auto px-4 py-8">
+  <!-- Page header -->
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">⭐ My Favorite Blogs</h1>
+    <a href="{% url 'home' %}" 
+       class="text-sm text-indigo-600 hover:underline">← Back to Blogs</a>
+  </div>
+
+  {% if favorites %}
+    <!-- Grid of favorites -->
+    <div class="grid gap-6 md:grid-cols-2">
+      {% for fav in favorites %}
+        <div class="bg-white shadow-md rounded-xl border p-5 hover:shadow-lg transition">
+          <!-- Blog title -->
+          <h2 class="text-lg font-semibold text-indigo-700 mb-1">
+            <a href="{% url 'blog_detail' fav.blog.slug %}" class="hover:underline">
+              {{ fav.blog.title }}
+            </a>
+          </h2>
+
+          <!-- Meta info -->
+          <p class="text-sm text-gray-500 mb-3">
+            By 
+            <a href="{% url 'profile' fav.blog.author.id %}" class="font-medium hover:text-indigo-600">
+              {{ fav.blog.author.get_full_name|default:fav.blog.author.username }}
+            </a>
+            • {{ fav.blog.created_at|date:"M d, Y" }}
+          </p>
+
+
+          <!-- Short excerpt -->
+          <p class="text-gray-600 mb-3 line-clamp-3">
+            {{ fav.blog.body|truncatewords:25 }}
+          </p>
+
+          <!-- Rating -->
+          <p class="text-sm mb-3">
+            ⭐ <span class="font-medium">{{ fav.blog.avg_rating|default:"0" }}/6</span>
+            {% if fav.blog.review_count %}
+              <span class="text-gray-500">({{ fav.blog.review_count }} reviews)</span>
+            {% endif %}
+          </p>
+
+          <!-- Actions -->
+          <div class="flex justify-between items-center">
+            <a href="{% url 'blog_detail' fav.blog.slug %}" 
+               class="px-3 py-1.5 rounded-lg bg-indigo-100 text-indigo-700 text-sm hover:bg-indigo-200 transition">
+               📖 Read More
+            </a>
+            <a href="{% url 'toggle_favorite' fav.blog.slug %}" 
+               class="px-3 py-1.5 rounded-lg bg-red-100 text-red-600 text-sm hover:bg-red-200 transition">
+               ❌ Remove
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <!-- Empty state -->
+    <div class="text-center py-20">
+      <p class="text-gray-500 text-lg">You haven’t added any favorites yet.</p>
+      <a href="{% url 'home' %}" 
+         class="inline-block mt-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm rounded-lg shadow">
+         Browse Blogs
+      </a>
+    </div>
+  {% endif %}
+</div>
+
+{% endblock %}
