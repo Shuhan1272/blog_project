@@ -200,7 +200,7 @@
   function openDeleteModal(slug) {
     // Update form action dynamically with blog slug
     const form = document.getElementById('deleteForm');
-    form.action = `/blogs/${slug}/delete/`;  // adapt if your URL pattern differs
+    form.action = `/${slug}/delete/`;  // adapt if your URL pattern differs
     document.getElementById('deleteModal').classList.remove('hidden');
   }
   function closeDeleteModal() {
@@ -255,7 +255,7 @@
 <script>
   function openReviewModal(slug, rating='', reviewText='') {
     const form = document.getElementById('reviewForm');
-    form.action = `/blogs/${slug}/review/`;  // adapt to your URL pattern
+    form.action = `/${slug}/review/`;  // adapt to your URL pattern
     form.rating.value = rating;
     form.review.value = reviewText;
     document.getElementById('reviewModal').classList.remove('hidden');

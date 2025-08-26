@@ -77,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'blogsite.wsgi.application'
+WSGI_APPLICATION = 'blogsite.wsgi.application' #$ gunicorn blogsite.wsgi:application
 
 
 # Database

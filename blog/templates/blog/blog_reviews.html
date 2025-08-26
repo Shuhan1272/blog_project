@@ -167,7 +167,7 @@
   // ----- Edit Modal -----
   function openReviewEditModal(slug, id, rating, reviewText) {
     const form = document.getElementById('editReviewForm');
-    form.action = `/blogs/${slug}/review/`;
+    form.action = `/${slug}/review/`;
     document.getElementById('editRatingInput').value = rating;
     document.getElementById('editReviewInput').value = reviewText;
     document.getElementById('reviewEditModal').classList.remove('hidden');
@@ -179,7 +179,7 @@
   // ----- Delete Modal -----
   function openReviewDeleteModal(slug, id) {
     const form = document.getElementById('deleteReviewForm');
-    form.action = `/blogs/${slug}/delete/review/`;
+    form.action = `/${slug}/delete/review/`;
     document.getElementById('reviewDeleteModal').classList.remove('hidden');
   }
   function closeReviewDeleteModal() {

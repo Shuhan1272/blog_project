@@ -132,14 +132,14 @@
 <script>
   function openDeleteModal(slug) {
     const form = document.getElementById('deleteForm');
-    form.action = `/blogs/${slug}/delete/`;
+    form.action = `/${slug}/delete/`;
     document.getElementById('deleteModal').classList.remove('hidden');
   }
   function closeDeleteModal() { document.getElementById('deleteModal').classList.add('hidden'); }
 
   function openReviewModal(slug, rating='', reviewText='') {
     const form = document.getElementById('reviewForm');
-    form.action = `/blogs/${slug}/review/`;
+    form.action = `/${slug}/review/`;
     form.rating.value = rating;
     form.review.value = reviewText;
     document.getElementById('reviewModal').classList.remove('hidden');
