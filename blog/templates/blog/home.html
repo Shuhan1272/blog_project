@@ -5,12 +5,12 @@
 <!-- Header with Create Blog -->
 <div class="flex items-center justify-between mb-5">
   <h1 class="text-2xl sm:text-3xl font-semibold">All Blogs</h1>
-  {% if user.is_authenticated %}
-    <a href="{% url 'create_blog' %}"
-       class="inline-flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-xl hover:bg-indigo-700">
-      <span class="text-lg leading-none">+</span> Create Blog
-    </a>
-  {% endif %}
+  
+  <a href="{% url 'create_blog' %}"
+      class="inline-flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-xl hover:bg-indigo-700">
+    <span class="text-lg leading-none">+</span> Create Blog
+  </a>
+  
 </div>
 
 <!-- Filters -->
@@ -39,7 +39,11 @@
         <option value="">All</option>
         {% for a in authors %}
           <option value="{{ a.id }}" {% if request.GET.author == a.id|stringformat:"s" %}selected{% endif %}>
-            {{ a.username }}
+            {% if request.user == a %} 
+              {{a.full_name}} (Me)
+            {% else %}
+              {{ a.full_name }}
+            {% endif %}
           </option>
         {% endfor %}
       </select>
@@ -82,7 +86,7 @@
 
         <!-- Title -->
         <h2 class="text-xl font-semibold leading-tight">
-          <a href="" class="text-indigo-700 hover:text-indigo-800">
+          <a href="{% url 'blog_detail' blog.slug %}" class="text-indigo-700 hover:text-indigo-800">
             {{ blog.title }}
           </a>
         </h2>
@@ -113,11 +117,13 @@
       <div class="px-5 pb-5">
         <div class="flex flex-wrap gap-2">
           <a href="{% url 'blog_detail' blog.slug %}" class="px-3 py-1.5 rounded-lg border hover:bg-gray-50 text-sm">Details</a>
+          
           <a href="javascript:void(0);" 
-           onclick="openReviewModal('{{ blog.slug }}', '{{ blog.user_review.rating }}', '{{ blog.user_review.review|escapejs }}')" 
-           class="px-3 py-1.5 rounded-lg border hover:bg-gray-50 text-sm">
-           Leave Review
+          onclick="openReviewModal('{{ blog.slug }}', '{{ blog.user_review.rating }}', '{{ blog.user_review.review|escapejs }}')" 
+          class="px-3 py-1.5 rounded-lg border hover:bg-gray-50 text-sm">
+          Leave Review
           </a>
+          
           <a href="{% url 'blog_reviews' blog.slug %}" class="px-3 py-1.5 rounded-lg border hover:bg-gray-50 text-sm">Show Reviews</a>
 
           {% if user.is_authenticated and user == blog.author %}

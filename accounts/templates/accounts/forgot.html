@@ -9,31 +9,6 @@
       <p class="text-gray-500 mt-2">Enter your email to receive a reset link</p>
     </div>
 
-    <!-- Messages -->
-    {% if messages %}
-      <div id="messages" class="mb-4 space-y-2">
-        {% for message in messages %}
-          <div class="px-4 py-2 rounded-lg text-sm
-            {% if message.tags == 'success' %}bg-green-50 border border-green-200 text-green-700
-            {% elif message.tags == 'error' %}bg-red-50 border border-red-200 text-red-700
-            {% else %}bg-blue-50 border border-blue-200 text-blue-700{% endif %}">
-            {{ message }}
-          </div>
-        {% endfor %}
-      </div>
-
-      <script>
-        // Auto dismiss messages after 3s
-        setTimeout(() => {
-          document.querySelectorAll('#messages div').forEach(msg => {
-            msg.style.transition = "opacity 0.5s ease";
-            msg.style.opacity = "0";
-            setTimeout(() => msg.remove(), 500);
-          });
-        }, 3000);
-      </script>
-    {% endif %}
-
     <!-- Forgot Password Form -->
     <form method="post" class="space-y-6">
       {% csrf_token %}

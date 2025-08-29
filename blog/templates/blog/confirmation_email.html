@@ -21,7 +21,7 @@
           <tr>
             <td style="font-size: 15px; color: #374151; line-height: 1.6; padding-bottom: 20px;">
               <p style="margin: 0 0 15px 0;">
-                Hi <strong>{{ user.first_name|default:user.username }}</strong>,
+                Hi <strong>{{ user.full_name }}</strong>,
               </p>
               <p style="margin: 0 0 15px 0;">
                 You have successfully marked the blog <strong>"{{ blog.title }}"</strong> as your favorite 🎉

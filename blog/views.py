@@ -10,9 +10,8 @@ from django.contrib import messages
 from blog.models import Blog
 
 
-@login_required
 def home(request):
-    blogs = Blog.objects.all().select_related('author').prefetch_related('categories', 'reviews')
+    blogs = Blog.objects.all().select_related('author').prefetch_related('categories', 'reviews').order_by('-created_at')   
     categories = Category.objects.all()
     authors = set(blog.author for blog in blogs)
 
@@ -43,8 +42,8 @@ def home(request):
     for blog in blogs:
         blog.avg_rating = blog.reviews.aggregate(Avg("rating"))["rating__avg"]
         blog.review_count = blog.reviews.count()
-        blog.user_review = blog.reviews.filter(user=request.user).first()
         if request.user.is_authenticated:
+            blog.user_review = blog.reviews.filter(user=request.user).first()
             blog.is_favorited = Favorite.objects.filter(blog=blog, user=request.user).exists()
         else:
             blog.is_favorited = False
@@ -52,13 +51,12 @@ def home(request):
     return render(request, 'blog/home.html', {'blogs': blogs, 'categories': categories, 'authors': authors})
 
 
-@login_required
 def blog_detail(request, slug):
     blog = Blog.objects.get(slug=slug)
     blog.avg_rating = blog.reviews.aggregate(Avg("rating"))["rating__avg"]
     blog.review_count = blog.reviews.count()
-    blog.user_review = blog.reviews.filter(user=request.user).first()
     if request.user.is_authenticated:
+        blog.user_review = blog.reviews.filter(user=request.user).first()
         blog.is_favorited = Favorite.objects.filter(blog=blog, user=request.user).exists()
     else:
         blog.is_favorited = False
@@ -129,7 +127,6 @@ def review_blog(request, slug):
     return redirect(url or 'home')
 
 
-@login_required
 def blog_reviews(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
     sort = request.GET.get("sort", "newest")

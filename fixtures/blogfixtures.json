@@ -3,225 +3,166 @@
     "model": "accounts.customuser",
     "pk": 1,
     "fields": {
-      "password": "pbkdf2_sha256$260000$hash",
+      "password": "pbkdf2_sha256$260000$5Jwr6K8FvM0o$uU2jSkmQnYBiJ6Prw2gQY6RrqfIVzt6g84W6c4tEmnw=",
       "last_login": null,
       "is_superuser": false,
-      "username": "user1",
-      "first_name": "Alice",
-      "last_name": "Johnson",
-      "email": "alice@example.com",
+      "first_name": "Rafiq",
+      "last_name": "Ahmed",
       "is_staff": false,
       "is_active": true,
-      "date_joined": "2025-01-01T10:00:00Z",
+      "date_joined": "2024-08-01T10:00:00Z",
       "role": "author",
-      "is_verified": true
+      "email": "rafiq@example.com",
+      "is_verified": true,
+      "agreed_t_and_c": true,
+      "bio": "I am a software engineer from Dhaka, Bangladesh.",
+      "username": "rafiq"
     }
   },
   {
     "model": "accounts.customuser",
     "pk": 2,
     "fields": {
-      "password": "pbkdf2_sha256$260000$hash",
-      "last_login": null,
-      "is_superuser": false,
-      "username": "user2",
-      "first_name": "Bob",
-      "last_name": "Smith",
-      "email": "bob@example.com",
-      "is_staff": false,
-      "is_active": true,
-      "date_joined": "2025-01-02T10:00:00Z",
+      "password": "pbkdf2_sha256$260000$5Jwr6K8FvM0o$uU2jSkmQnYBiJ6Prw2gQY6RrqfIVzt6g84W6c4tEmnw=",
+      "first_name": "Shirin",
+      "last_name": "Akter",
+      "email": "shirin@example.com",
       "role": "reader",
-      "is_verified": true
+      "is_verified": true,
+      "agreed_t_and_c": true,
+      "bio": "Content reader and blogger from Chittagong.",
+      "username": "shirin"
     }
   },
   {
     "model": "accounts.customuser",
     "pk": 3,
     "fields": {
-      "password": "pbkdf2_sha256$260000$hash",
-      "last_login": null,
-      "is_superuser": false,
-      "username": "user3",
-      "first_name": "Charlie",
-      "last_name": "Brown",
-      "email": "charlie@example.com",
-      "is_staff": false,
-      "is_active": true,
-      "date_joined": "2025-01-03T10:00:00Z",
+      "password": "pbkdf2_sha256$260000$5Jwr6K8FvM0o$uU2jSkmQnYBiJ6Prw2gQY6RrqfIVzt6g84W6c4tEmnw=",
+      "first_name": "Hasan",
+      "last_name": "Kamal",
+      "email": "hasan@example.com",
       "role": "author",
-      "is_verified": true
+      "is_verified": false,
+      "agreed_t_and_c": true,
+      "bio": "Fullstack developer from Sylhet.",
+      "username": "hasan"
     }
   },
   {
     "model": "accounts.customuser",
     "pk": 4,
     "fields": {
-      "password": "pbkdf2_sha256$260000$hash",
-      "last_login": null,
-      "is_superuser": false,
-      "username": "user4",
-      "first_name": "Diana",
-      "last_name": "Prince",
-      "email": "diana@example.com",
-      "is_staff": false,
-      "is_active": true,
-      "date_joined": "2025-01-04T10:00:00Z",
+      "password": "pbkdf2_sha256$260000$5Jwr6K8FvM0o$uU2jSkmQnYBiJ6Prw2gQY6RrqfIVzt6g84W6c4tEmnw=",
+      "first_name": "Nusrat",
+      "last_name": "Jahan",
+      "email": "nusrat@example.com",
       "role": "reader",
-      "is_verified": true
+      "is_verified": true,
+      "agreed_t_and_c": true,
+      "bio": "Tech enthusiast from Rajshahi.",
+      "username": "nusrat"
     }
   },
   {
     "model": "accounts.customuser",
     "pk": 5,
     "fields": {
-      "password": "pbkdf2_sha256$260000$hash",
-      "last_login": null,
-      "is_superuser": false,
-      "username": "user5",
-      "first_name": "Eve",
-      "last_name": "Davis",
-      "email": "eve@example.com",
-      "is_staff": false,
-      "is_active": true,
-      "date_joined": "2025-01-05T10:00:00Z",
+      "password": "pbkdf2_sha256$260000$5Jwr6K8FvM0o$uU2jSkmQnYBiJ6Prw2gQY6RrqfIVzt6g84W6c4tEmnw=",
+      "first_name": "Tariq",
+      "last_name": "Hossain",
+      "email": "tariq@example.com",
       "role": "author",
-      "is_verified": true
+      "is_verified": true,
+      "agreed_t_and_c": true,
+      "bio": "Backend developer from Khulna, Bangladesh.",
+      "username": "tariq"
     }
   },
 
-  {
-    "model": "blog.category",
-    "pk": 1,
-    "fields": {
-      "category_name": "Technology",
-      "slug": "technology",
-      "created_at": "2025-01-01T10:00:00Z",
-      "updated_at": "2025-01-01T10:00:00Z"
-    }
-  },
-  {
-    "model": "blog.category",
-    "pk": 2,
-    "fields": {
-      "category_name": "Health",
-      "slug": "health",
-      "created_at": "2025-01-02T10:00:00Z",
-      "updated_at": "2025-01-02T10:00:00Z"
-    }
-  },
+  { "model": "blog.category", "pk": 1, "fields": {"category_name": "Technology", "slug": "technology", "created_at": "2024-08-01T10:00:00Z", "updated_at": "2024-08-01T10:00:00Z"} },
+  { "model": "blog.category", "pk": 2, "fields": {"category_name": "Programming", "slug": "programming", "created_at": "2024-08-01T10:00:00Z", "updated_at": "2024-08-01T10:00:00Z"} },
+  { "model": "blog.category", "pk": 3, "fields": {"category_name": "Travel", "slug": "travel", "created_at": "2024-08-01T10:00:00Z", "updated_at": "2024-08-01T10:00:00Z"} },
+  { "model": "blog.category", "pk": 4, "fields": {"category_name": "Food", "slug": "food", "created_at": "2024-08-01T10:00:00Z", "updated_at": "2024-08-01T10:00:00Z"} },
+  { "model": "blog.category", "pk": 5, "fields": {"category_name": "Lifestyle", "slug": "lifestyle", "created_at": "2024-08-01T10:00:00Z", "updated_at": "2024-08-01T10:00:00Z"} },
+  { "model": "blog.category", "pk": 6, "fields": {"category_name": "Education", "slug": "education", "created_at": "2024-08-01T10:00:00Z", "updated_at": "2024-08-01T10:00:00Z"} },
+  { "model": "blog.category", "pk": 7, "fields": {"category_name": "Health", "slug": "health", "created_at": "2024-08-01T10:00:00Z", "updated_at": "2024-08-01T10:00:00Z"} },
+  { "model": "blog.category", "pk": 8, "fields": {"category_name": "Business", "slug": "business", "created_at": "2024-08-01T10:00:00Z", "updated_at": "2024-08-01T10:00:00Z"} },
 
   {
     "model": "blog.blog",
     "pk": 1,
     "fields": {
-      "title": "AI in 2025",
-      "slug": "ai-in-2025",
-      "body": "Artificial Intelligence is evolving rapidly...",
+      "title": "My First Django Blog",
+      "slug": "my-first-django-blog",
+      "body": "This is my very first Django blog written as a beginner developer in Bangladesh. I wanted to share how I started learning Django, from setting up the project to creating models and views. The process was exciting and challenging, and writing this post helps me reflect on my journey. Hopefully, it inspires others to start their own projects confidently.",
       "author": 1,
-      "created_at": "2025-01-05T10:00:00Z",
-      "updated_at": "2025-01-05T10:00:00Z",
-      "categories": [1]
+      "categories": [1, 2, 6],
+      "created_at": "2024-08-01T10:10:00Z",
+      "updated_at": "2024-08-01T10:10:00Z"
     }
   },
   {
     "model": "blog.blog",
     "pk": 2,
     "fields": {
-      "title": "Healthy Living",
-      "slug": "healthy-living",
-      "body": "Tips and tricks for a healthier lifestyle...",
+      "title": "Exploring Coxs Bazar",
+      "slug": "exploring-coxs-bazar",
+      "body": "Visiting Cox’s Bazar, the longest sea beach in the world, was an unforgettable experience. The golden sand, blue waves, and lively atmosphere make it a dream destination for travelers. I enjoyed walking by the beach, trying local seafood, and watching the sunset. This blog is my attempt to capture those moments and share the beauty of Bangladesh’s coastline with everyone.",
       "author": 2,
-      "created_at": "2025-01-06T10:00:00Z",
-      "updated_at": "2025-01-06T10:00:00Z",
-      "categories": [2]
+      "categories": [3, 5],
+      "created_at": "2024-08-02T11:00:00Z",
+      "updated_at": "2024-08-02T11:00:00Z"
     }
   },
   {
     "model": "blog.blog",
     "pk": 3,
     "fields": {
-      "title": "Python Tricks",
-      "slug": "python-tricks",
-      "body": "Some neat Python tricks you should know...",
+      "title": "Best Street Food in Dhaka",
+      "slug": "best-street-food-in-dhaka",
+      "body": "Dhaka is heaven for street food lovers, with countless stalls offering affordable and delicious meals. Fuchka, chotpoti, kebabs, biryani, and jilapi are just a few examples of the mouthwatering options available. I explored Old Dhaka and found vendors preparing food with passion and tradition. This blog highlights my favorite spots and why street food in Dhaka reflects the culture and spirit of the city.",
       "author": 3,
-      "created_at": "2025-01-07T10:00:00Z",
-      "updated_at": "2025-01-07T10:00:00Z",
-      "categories": [1]
-    }
-  },
-
-  {
-    "model": "blog.review",
-    "pk": 1,
-    "fields": {
-      "blog": 1,
-      "user": 2,
-      "rating": 5,
-      "review": "Amazing insights into AI!",
-      "is_approved": true,
-      "created_at": "2025-01-08T10:00:00Z",
-      "updated_at": "2025-01-08T10:00:00Z"
+      "categories": [4, 5],
+      "created_at": "2024-08-03T12:00:00Z",
+      "updated_at": "2024-08-03T12:00:00Z"
     }
   },
   {
-    "model": "blog.review",
-    "pk": 2,
-    "fields": {
-      "blog": 1,
-      "user": 3,
-      "rating": 4,
-      "review": "Very informative.",
-      "is_approved": true,
-      "created_at": "2025-01-08T11:00:00Z",
-      "updated_at": "2025-01-08T11:00:00Z"
-    }
-  },
-  {
-    "model": "blog.review",
-    "pk": 3,
-    "fields": {
-      "blog": 1,
-      "user": 4,
-      "rating": 4,
-      "review": "Good but could be deeper.",
-      "is_approved": true,
-      "created_at": "2025-01-08T12:00:00Z",
-      "updated_at": "2025-01-08T12:00:00Z"
-    }
-  },
-  {
-    "model": "blog.review",
+    "model": "blog.blog",
     "pk": 4,
     "fields": {
-      "blog": 1,
-      "user": 5,
-      "rating": 5,
-      "review": "Loved it!",
-      "is_approved": true,
-      "created_at": "2025-01-08T13:00:00Z",
-      "updated_at": "2025-01-08T13:00:00Z"
+      "title": "Learning Python for Beginners",
+      "slug": "learning-python-for-beginners",
+      "body": "Python is one of the most beginner-friendly programming languages and a great way to start coding. When I began learning Python in Bangladesh, I started with basic syntax, loops, and functions before moving to Django. In this blog, I explain why Python is simple, versatile, and widely used in data science, web development, and automation. It can help anyone build a strong programming foundation.",
+      "author": 4,
+      "categories": [2, 6],
+      "created_at": "2024-08-04T13:00:00Z",
+      "updated_at": "2024-08-04T13:00:00Z"
     }
   },
+  {
+    "model": "blog.blog",
+    "pk": 5,
+    "fields": {
+      "title": "Health Benefits of Cycling",
+      "slug": "health-benefits-of-cycling",
+      "body": "Cycling is not just a mode of transport in Bangladesh, it is also a lifestyle choice that brings countless health benefits. It improves heart fitness, strengthens muscles, reduces stress, and keeps people active. In cities like Dhaka, cycling also helps reduce traffic congestion and pollution. In this blog, I share why more people should adopt cycling, both for personal well-being and for our environment.",
+      "author": 5,
+      "categories": [7, 5],
+      "created_at": "2024-08-05T14:00:00Z",
+      "updated_at": "2024-08-05T14:00:00Z"
+    }
+  }, 
 
-  {
-    "model": "blog.favorite",
-    "pk": 1,
-    "fields": {
-      "blog": 1,
-      "user": 2,
-      "created_at": "2025-01-09T10:00:00Z",
-      "updated_at": "2025-01-09T10:00:00Z"
-    }
-  },
-  {
-    "model": "blog.favorite",
-    "pk": 2,
-    "fields": {
-      "blog": 1,
-      "user": 3,
-      "created_at": "2025-01-09T11:00:00Z",
-      "updated_at": "2025-01-09T11:00:00Z"
-    }
-  }
+  { "model": "blog.review", "pk": 1, "fields": {"blog": 1, "user": 2, "rating": 4.5, "review": "Very helpful blog!", "is_approved": true, "created_at": "2024-08-06T09:00:00Z", "updated_at": "2024-08-06T09:00:00Z"} },
+  { "model": "blog.review", "pk": 2, "fields": {"blog": 1, "user": 3, "rating": 5, "review": "Great insights.", "is_approved": true, "created_at": "2024-08-06T09:10:00Z", "updated_at": "2024-08-06T09:10:00Z"} },
+  { "model": "blog.review", "pk": 3, "fields": {"blog": 2, "user": 1, "rating": 4, "review": "Loved reading about Cox's Bazar.", "is_approved": true, "created_at": "2024-08-06T09:20:00Z", "updated_at": "2024-08-06T09:20:00Z"} },
+  { "model": "blog.review", "pk": 4, "fields": {"blog": 3, "user": 4, "rating": 4, "review": "Street food blog is mouthwatering!", "is_approved": true, "created_at": "2024-08-06T09:30:00Z", "updated_at": "2024-08-06T09:30:00Z"} },
+  { "model": "blog.review", "pk": 5, "fields": {"blog": 4, "user": 5, "rating": 5, "review": "Python basics are well explained.", "is_approved": true, "created_at": "2024-08-06T09:40:00Z", "updated_at": "2024-08-06T09:40:00Z"} },
+
+  { "model": "blog.favorite", "pk": 1, "fields": {"blog": 1, "user": 2, "created_at": "2024-08-07T08:00:00Z", "updated_at": "2024-08-07T08:00:00Z"} },
+  { "model": "blog.favorite", "pk": 2, "fields": {"blog": 2, "user": 1, "created_at": "2024-08-07T08:10:00Z", "updated_at": "2024-08-07T08:10:00Z"} },
+  { "model": "blog.favorite", "pk": 3, "fields": {"blog": 3, "user": 4, "created_at": "2024-08-07T08:20:00Z", "updated_at": "2024-08-07T08:20:00Z"} },
+  { "model": "blog.favorite", "pk": 4, "fields": {"blog": 5, "user": 3, "created_at": "2024-08-07T08:30:00Z", "updated_at": "2024-08-07T08:30:00Z"} }
 ]

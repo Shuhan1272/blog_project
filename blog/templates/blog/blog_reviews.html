@@ -62,7 +62,7 @@
             <div>
             <p class="font-semibold text-gray-800">
               <a href="{% url 'profile' review.user.id %}" class="hover:text-indigo-600">
-                {{ review.user.get_full_name|default:review.user.username }}
+                {{ review.user.full_name }}
               </a>
             </p>
             <p class="text-xs text-gray-500">{{ review.created|date:"M d, Y H:i" }}</p>

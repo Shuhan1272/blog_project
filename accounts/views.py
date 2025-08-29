@@ -124,7 +124,7 @@ def set_new_password(request):
         if form.is_valid():
             messages.success(request,"Password updated successfully.")
             form.save()
-            return redirect("profile",request.user.id)
+            return redirect('login')
     else:
         form = SetPasswordForm(request.user)
     context = {
@@ -132,7 +132,6 @@ def set_new_password(request):
     }
     return render(request, "accounts/set-new-password.html",context)
 
-@login_required
 def user_dashboard(request,id):
     author = CustomUser.objects.get(id=id)
     blogs = Blog.objects.filter(author=author).prefetch_related("categories", "reviews")
@@ -168,7 +167,7 @@ def change_password(request):
         if form.is_valid():
             messages.success(request,"Password changed successfully.")
             form.save()
-            return redirect("profile",request.user.id)
+            return redirect('login')
     else:
         form = PasswordChangeForm(user)
     context = {

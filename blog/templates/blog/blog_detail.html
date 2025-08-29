@@ -30,7 +30,7 @@
             {{ blog.author.first_name|slice:":1"|default:"A" }}
           </div>
         {% endif %}
-        <a href="{% url 'profile' blog.author.id %}" class="hover:text-indigo-600 font-medium">{{ blog.author.full_name|default:blog.author.username }}</a>
+        <a href="{% url 'profile' blog.author.id %}" class="hover:text-indigo-600 font-medium">{{ blog.author.full_name }}</a>
       </div>
       <span>• {{ blog.created_at|date:"M d, Y H:i" }}</span>
       <span>• ⭐ {{ blog.avg_rating|default:"0" }}/6</span>

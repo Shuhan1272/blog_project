@@ -5,6 +5,7 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
+from django.utils import timezone
 
 
 def send_verification_email(request, user):
@@ -18,12 +19,15 @@ def send_verification_email(request, user):
     verification_link = f"http://{current_site.domain}/accounts/verify/{uid}/{token}" #creating varification link 
     #for this link we will make one url and one view which will varify email 
 
-    print("**************verification link : ",verification_link)
-
     email_subject = "Verify Your Email Address"
     email_body = render_to_string(
         "accounts/verification_email.html",
-        {"user": user, "verification_link": verification_link},
+        {
+            "user": user,
+            "verification_link": verification_link,
+            "site_name": "BlogSite",
+            "year": timezone.now().year,
+        }, 
     )
 
     email = EmailMessage( #here EmailMessage is a build in class 
@@ -50,7 +54,12 @@ def send_password_reset_email(request, user):
     email_subject = "Reset Your Password"
     email_body = render_to_string(
         "accounts/verification_email.html",
-        {"user": user, "verification_link": verification_link},
+        {
+            "user": user,
+            "verification_link": verification_link,
+            "site_name": "BlogSite",
+            "year": timezone.now().year,
+        }, 
     )
 
     email = EmailMessage(
